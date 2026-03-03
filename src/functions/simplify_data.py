@@ -21,8 +21,9 @@ def simplify_data(path):
                 temp = set_parameters("power", "power", c, temp)
                 temp = set_parameters("toughness", "toughness", c, temp)
                 simpler.append(temp)
-    with open("data/non-collection.json", 'w') as f:
+    with open("data/commander_legal_cards.json", 'w') as f:
         json.dump(simpler, f, indent=4)
+    return simpler
 
 def set_parameters(scryfall_key, my_key, card, dict):
     if scryfall_key == "type_line":

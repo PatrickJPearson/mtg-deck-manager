@@ -16,7 +16,7 @@
 
 card
 -image
--card type
+-card type, other types
 -power
 -toughness
 -cost
@@ -34,3 +34,5 @@ card
 -suggest card
 -create deck
 -modify deck
+-alphabetize collection/non-collection
+-add to collection/non-collection
