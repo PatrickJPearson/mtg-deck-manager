@@ -1,7 +1,7 @@
-import os, json
+import os, json, tkinter as tk
+import tkinter.font as tkFont
 from functions.simplify_data import simplify_data
-from functions.format_deck_list import format_deck_list
-from functions.add_deck import add_deck
+from control_frame import control_frame
 
 def main():
     commander_legal_cards = []
@@ -11,18 +11,24 @@ def main():
     else:     
         #script to download from scryfall
         commander_legal_cards = simplify_data("data/scryfall.json")
+    collection_path = "data/scryfall.json"
     collection = []
     if os.path.isfile("data/collection.json"):
         with open("data/collection.json")as f:
             collection = json.load(f)
     else:
-        with open("data/collection.json") as e:
-            e.write("")
-    #format_deck_list("data/decks/uratest.txt", "data/decks/uraburn.json")
-    with open("data/decks/uraburnsource.json")as f:
-        deck_list = json.load(f)
-        add_deck("uraburn", collection, commander_legal_cards, "data/collection.json", deck_list=deck_list)
+        with open("data/collection.json", 'w') as e:
+            e.write("[]")
+    root = tk.Tk()
+    root.geometry("2200x1800")
+    root.grid_rowconfigure(0, weight=1)
+    root.grid_columnconfigure(0, weight=1)
+    default_font = tkFont.nametofont("TkDefaultFont")
+    default_font.configure(size=12)
+    control = control_frame(root, collection, collection_path, commander_legal_cards)
+    control.h_frame.tkraise()
 
+    root.mainloop()
 
     
 
