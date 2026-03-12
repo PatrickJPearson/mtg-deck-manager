@@ -1,4 +1,4 @@
-import unittest, json
+import unittest
 from functions.add_card_list import add_card_list
 
 class TestAddCardList(unittest.TestCase):

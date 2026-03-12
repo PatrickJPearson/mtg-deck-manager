@@ -6,13 +6,15 @@ class home_frame(tk.Frame):
         self.outer = outer
         title = tk.Label(self, text="MTG Collection Manager")
         title.grid()
-        collection = tk.Button(self, text="Collection", command=lambda: outer.setFrame("collection"))
-        list_decks = tk.Button(self, text="Decks", command=lambda: outer.setFrame("list_decks"))
-        quit = tk.Button(self, text="Quit", command=lambda: outer.setFrame("quit"))
+        collection = tk.Button(self, text="Collection", command=lambda: outer.set_frame("collection"))
+        commander_legal_cards = tk.Button(self, text="Commander Legal Cards", command=lambda: outer.set_frame("commander_legal_cards"))
+        list_decks = tk.Button(self, text="Decks", command=lambda: outer.set_frame("list_decks"))
+        quit = tk.Button(self, text="Quit", command=lambda: outer.set_frame("quit"))
         title.grid(row=0, column=0)
         collection.grid(row=4, column=6)
-        list_decks.grid(row=5, column=6)
-        quit.grid(row=6, column=6)
+        commander_legal_cards.grid(row=5, column=6)
+        list_decks.grid(row=6, column=6)
+        quit.grid(row=7, column=6)
 
 
 

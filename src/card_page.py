@@ -5,38 +5,103 @@ class card_page(tk.Frame):
             super().__init__(p_frame)
             self.grid_rowconfigure(0, weight=1)
             self.grid_columnconfigure(0, weight=1)
-            self.name = tk.Label(self, text=f"{item["name"]}")
-            self.name.grid(row=0,column=0) 
-            if "cost" in item and not item["cost"] == [] and not item["cost"]=="":
-                self.cost = tk.Label(self, text=f"cost: {item["cost"]}")
-                self.cost.grid(row=0,column=1)             
-            if "cmc" in item and not item["cmc"] == []:
-                self.cmc = tk.Label(self, text=f"cmc: {item["cmc"]}")
-                self.cmc.grid(row=0,column=2) 
+            self.full_name = tk.Label(self, text=f"{item["name"]}")
+            self.full_name.pack()
+
             if "color_id" in item and not item["color_id"] == []:
                 self.color_id = tk.Label(self, text=f"color_id: {item["color_id"]}")
-                self.color_id.grid(row=0,column=3) 
-            if "cardtype" in item and not item["cardtype"] == []:
-                self.cardtype = tk.Label(self, text=f"cardtype: {item["cardtype"]}")
-                self.cardtype.grid(row=1,column=0) 
-            if "supertype" in item and not item["supertype"] == []:
-                self.supertype = tk.Label(self, text=f"supertype: {item["supertype"]}")
-                self.supertype.grid(row=1,column=1) 
-            if "subtype" in item and not item["subtype"] == []:
-                self.subtype = tk.Label(self, text=f"subtype: {item["subtype"]}")
-                self.subtype.grid(row=1,column=2) 
-            if "textbox" in item and not item["textbox"] == []:
-                self.textbox = tk.Label(self, text=f"{item["textbox"]}", wraplength=400)
-                self.textbox.grid(row=2,column=0, columnspan=3) 
-            if "keywords" in item and not item["keywords"] == []:
-                self.keywords = tk.Label(self, text=f"keywords: {item["keywords"]}")
-                self.keywords.grid(row=3,column=0) 
-            if "quantity" in item and not item["quantity"] == []:
-                self.quantity = tk.Label(self, text=f"quantity: {item["quantity"]}")
-                self.quantity.grid(row=3,column=1) 
-            if "number_in_deck" in item and not item["number_in_deck"] == []:
-                self.number_in_deck  = tk.Label(self, text=f"number in decks: {item["number_in_deck"]}")
-                self.number_in_deck.grid(row=3,column=2)         
+                self.color_id.pack()
             if "card_faces" in item and not item["card_faces"] == []:
                 self.card_faces = tk.Label(self, text=f"is dual faced")
-                self.card_faces.grid(row=3,column=3) 
+                self.card_faces.pack()
+                self.build_card_page(item, True, True)
+
+            else:
+                self.build_card_page(item, False, False)
+
+
+
+    def build_card_page(self, item, is_recursive, is_dual_faced):
+        card = item
+        if is_dual_faced and is_recursive:
+            card = item["card_faces"][0]
+        elif is_dual_faced:
+            card = item["card_faces"][1]
+        if "name" in card and is_dual_faced and not card == []:
+            if is_recursive:
+                self.name0 = tk.Label(self, text=f"Font Face: {card["name"]}")
+                self.name0.pack()
+            else:
+                self.name = tk.Label(self, text=f"Back Face: {card["name"]}")
+                self.name.pack()
+        if "cost" in card and not card["cost"] == [] and not card["cost"]=="":
+            if is_recursive:
+                self.cost0 = tk.Label(self, text=f"Cost: {card["cost"]}")
+                self.cost0.pack()
+            else:
+                self.cost = tk.Label(self, text=f"Cost: {card["cost"]}")
+                self.cost.pack()   
+        if "cmc" in card and not card["cmc"] == []:
+            if is_recursive:
+                self.cmc0 = tk.Label(self, text=f"Cmc: {card["cmc"]}")
+                self.cmc0.pack()
+            else:
+                self.cmc = tk.Label(self, text=f"Cmc: {card["cmc"]}")
+                self.cmc.pack()
+        if "cardtype" in card and not card["cardtype"] == []:
+            if is_recursive:
+                self.cardtype0 = tk.Label(self, text=f"Cardtype: {card["cardtype"]}")
+                self.cardtype0.pack()
+            else:
+                self.cardtype = tk.Label(self, text=f"Cardtype: {card["cardtype"]}")
+                self.cardtype.pack()
+        if "supertype" in card and not card["supertype"] == []:
+            if is_recursive:
+                self.supertype0 = tk.Label(self, text=f"Supertype: {card["supertype"]}")
+                self.supertype0.pack()
+            else:           
+                self.supertype = tk.Label(self, text=f"Supertype: {card["supertype"]}")
+                self.supertype.pack()
+        if "subtype" in card and not card["subtype"] == []:
+            if is_recursive:
+                self.subtype0 = tk.Label(self, text=f"Subtype: {card["subtype"]}")
+                self.subtype0.pack()
+            else:
+                self.subtype = tk.Label(self, text=f"Subtype: {card["subtype"]}")
+                self.subtype.pack()
+        if "textbox" in card and not card["textbox"] == []:
+            if is_recursive:
+                self.textbox0 = tk.Label(self, text=f"{card["textbox"]}", wraplength=400)
+                self.textbox0.pack()
+            else:
+                self.textbox = tk.Label(self, text=f"{card["textbox"]}", wraplength=400)
+                self.textbox.pack() 
+        if "keywords" in card and not card["keywords"] == []:
+            if is_recursive:
+                self.keywords0 = tk.Label(self, text=f"Keywords: {card["keywords"]}")
+                self.keywords0.pack()
+            else:
+                self.keywords = tk.Label(self, text=f"Keywords: {card["keywords"]}")
+                self.keywords.pack()
+        if "quantity" in card and not card["quantity"] == []:
+            if is_recursive:
+                self.quantity0 = tk.Label(self, text=f"Quantity: {card["quantity"]}")
+                self.quantity0.pack()
+            else:
+                self.quantity = tk.Label(self, text=f"Quantity: {card["quantity"]}")
+                self.quantity.pack()
+        if "number_in_deck" in card and not card["number_in_deck"] == []:
+            if is_recursive:
+                self.number_in_deck0 = tk.Label(self, text=f"Number in Decks: {card["number_in_deck"]}")
+                self.number_in_deck0.pack()
+            else:
+                self.number_in_deck  = tk.Label(self, text=f"Number in Decks: {card["number_in_deck"]}")
+                self.number_in_deck.pack()
+
+        if is_recursive:
+            self.build_card_page(item, False, is_dual_faced)
+        else:
+            self.add_button = tk.Checkbutton(self, text="Add", onvalue=1, offvalue=0)
+            self.add_button.pack()
+
+
