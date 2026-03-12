@@ -1,8 +1,9 @@
--button on deck screen to view decks
+MTG Collection Manager
 
+This program serves as a collection manager, search tool, and deck builder/viewer.
 
+(some feature, such as deck size, are not implemented)
 
--script to download from scryfall
+To use: clone this repository
 
-
-
+This project uses the following libraries: requests, json, tkinter
